@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // take modal
 const Login = () => {
@@ -38,8 +39,8 @@ const Login = () => {
               Login
             </button>
             <p>
-              Not registered?{" "}
-              <span className="text-white-500 underline">Signup</span>
+              Not registered?
+              <Link to="/signup">SignUp</Link>
             </p>
           </div>
         </div>
