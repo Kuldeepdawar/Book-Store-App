@@ -5,12 +5,12 @@ const Banner = () => {
   return (
     <>
       <div className="  max-w-screen-2xl container mx-auto md:px-20 px-4 flex flex-col md:flex-row">
-        <div className="order-2 md:order-1  w-full md:w-1/2 mt-12 md:mt-35">
-          <div className="space-y-12 ">
+        <div className="order-2 md:order-1   w-full md:w-1/2 mt-12 md:mt-35">
+          <div className="space-y-12 mt-11 ">
             <h1 className="text-3xl font-bold p-4">
               This book provides you knowledge related to your interest!!!!
               <span className="text-pink-500 p-4">
-                You can check all Books below
+                You can check alls below
               </span>
             </h1>
             <p className="text-xl">
