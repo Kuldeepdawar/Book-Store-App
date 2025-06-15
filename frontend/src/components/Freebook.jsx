@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import list from "../../public/list.json";
+import Cards from "./Cards";
 
 const Freebook = () => {
   const filterData = list.filter((data) => data.category === "free");
@@ -50,13 +51,17 @@ const Freebook = () => {
           {" "}
           <h1 className="font-bold text-xl pb-5">Free offered courses</h1>
           <p>
-            These books are very helpfull to improving in knowledge and using
+            These books are very helpful to improving in knowledge and using
             these book you can get to know latest trends
           </p>
         </div>
 
         <div>
-          <Slider {...settings}>{filterData.map(item)}</Slider>
+          <Slider {...settings}>
+            {filterData.map((item) => (
+              <Cards item={item} key={item.id} />
+            ))}
+          </Slider>
         </div>
       </div>
     </>
