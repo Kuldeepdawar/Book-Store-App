@@ -1,15 +1,16 @@
-import Banner from "./components/Banner";
-import Footer from "./components/Footer";
-import Freebook from "./components/Freebook";
-import Navbar from "./components/Navbar";
+import Courses from "./courses/Courses";
+import Home from "./Home/Home";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Banner />
-      <Freebook />
-      <Footer />
+      <div className="dark:bg-slate-600 dark:text-white">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/course" element={<Courses />} />
+        </Routes>
+      </div>
     </>
   );
 }
