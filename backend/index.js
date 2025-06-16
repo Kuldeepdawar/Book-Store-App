@@ -1,9 +1,10 @@
 import express from "express";
-import routePath from "./route/book.route.js";
+import userRoutes from "./route/user.route.js";
+import bookRoutes from "./route/book.route.js";
+import connectDbDatabase from "./db/connectDb.js";
 import cors from "cors";
 
 import dotenv from "dotenv";
-import connectDbDatabase from "./db/connectDb.js";
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use("/book", routePath);
+app.use("/user", userRoutes); // <--- this makes POST /user/signup work
+app.use("/book", bookRoutes);
 
 app.get("/", (req, res) => {
   res.send("This is my server request");
@@ -21,7 +23,11 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  connectDbDatabase();
-  console.log(`server is running ${port}`);
+app.listen(port, async () => {
+  try {
+    await connectDbDatabase();
+    console.log(`✅ Server is running on http://localhost:${port}`);
+  } catch (err) {
+    console.error("❌ Database connection failed", err);
+  }
 });
