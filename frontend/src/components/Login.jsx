@@ -25,12 +25,17 @@ const Login = () => {
         console.log(res.data);
         if (res.data) {
           toast.success("Login successfully");
+          document.getElementById("my_modal_3").close();
+          setTimeout(() => {
+            localStorage.setItem("Users", JSON.stringify(res.data.user));
+            window.location.reload();
+          }, 3000);
         }
-        localStorage.setItem("Users", JSON.stringify(res.data.user));
       })
       .catch((err) => {
         if (Error.res) {
           toast.error("Error:" + err.response.data.message);
+          setTimeout(() => {}, 3000);
         }
       });
   };
@@ -46,6 +51,7 @@ const Login = () => {
             <Link
               to="/"
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={() => document.getElementById("my_modal_3").close()}
             >
               ✕
             </Link>
