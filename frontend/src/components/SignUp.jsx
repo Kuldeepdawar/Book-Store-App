@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Login from "./Login";
 
+import axios from "axios";
+import toast from "react-hot-toast";
+
 const SignUp = () => {
   // React Hook Form setup
   const {
@@ -12,9 +15,27 @@ const SignUp = () => {
   } = useForm();
 
   // Form submit handler
-  const onSubmit = (data) => {
-    console.log("Signup Data:", data);
+  const onSubmit = async (data) => {
     // Here you can send data to backend
+    const userInfo = {
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+    };
+    await axios
+      .post("http://localhost:4001/user/signup", userInfo)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data) {
+          toast.success("Signup successfully");
+        }
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+      })
+      .catch((err) => {
+        if (err.response) {
+          toast.error("Error:" + err.response.data.message);
+        }
+      });
   };
 
   return (
@@ -39,11 +60,11 @@ const SignUp = () => {
               type="text"
               placeholder="Enter your name"
               className="w-full px-4 py-2 border rounded-md outline-none focus:ring-2 focus:ring-pink-400 text-black"
-              {...register("name", { required: "Name is required" })}
+              {...register("fullname", { required: "Name is required" })}
             />
-            {errors.name && (
+            {errors.fullname && (
               <span className="text-sm text-red-600">
-                {errors.name.message}
+                {errors.fullname.message}
               </span>
             )}
           </div>
